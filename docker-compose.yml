@@ -1,16 +1,31 @@
-version: "3"
 services:
+  outline:
+    image: mislavperi/outline
+    build: ./Dockerfile
+    env_file: ./docker.env
+    container_name: outline
+    volumes:
+      - storage-data:/var/lib/outline/data
+    networks:
+      - outline-network
+    depends_on:
+      - outline_postgres
+      - redis
+    ports:
+      - 3011:3000
   redis:
     image: redis
-    ports:
-      - "127.0.0.1:6379:6379"
-    user: "redis:redis"
+    env_file: ./docker.env
+    container_name: redis
+    networks:
+      - outline-network
+    command: ["redis-server"]
   postgres:
-    image: postgres
-    ports:
-      - "127.0.0.1:5432:5432"
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: outline
-    user: "postgres:postgres"
+    container_name: outline_postgres
+    env_file: ./docker.env
+    networks:
+      - outline-network
+    volumes:
+      - outline-postgres:/var/lib/postgresql/data
+
+networks: outline-network
