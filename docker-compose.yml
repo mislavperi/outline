@@ -34,3 +34,7 @@ services:
 networks:
   outline-network:
     external: true
+
+volumes:
+  outline-postgres:
+  storage-data:
