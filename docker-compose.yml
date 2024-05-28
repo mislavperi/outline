@@ -20,7 +20,7 @@ services:
     image: mislavperi/outline
     build:
       context: .
-      image: Dockerfile
+      dockerfile: Dockerfile
     env_file: ./docker.env
     container_name: outline
     volumes:
