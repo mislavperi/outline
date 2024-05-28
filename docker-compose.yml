@@ -18,7 +18,9 @@ services:
       - outline-postgres:/var/lib/postgresql/data
   outline:
     image: mislavperi/outline
-    build: ./Dockerfile
+    build:
+      context: .
+      image: Dockerfile
     env_file: ./docker.env
     container_name: outline
     volumes:
