@@ -30,6 +30,8 @@ services:
       - redis
     ports:
       - 127.0.0.1:3011:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 networks:
   outline-network:
