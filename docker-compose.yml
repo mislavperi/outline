@@ -25,18 +25,19 @@ services:
       - storage-data:/var/lib/outline/data
     networks:
       - outline-network
+      - reverse-proxy
     depends_on:
       - postgres
       - redis
     ports:
       - 127.0.0.1:3011:3000
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
 networks:
   outline-network:
+    name: outline-network
     external: true
-
+  reverse-proxy:
+    external: true
 volumes:
   outline-postgres:
   storage-data:
